@@ -1,7 +1,7 @@
 <?php
 /*
  * Created by Bayramklychov Shohrad
- *  Base Controller
+ * Base Controller
  * Loads the modules and views
 */
 class Controller {
