@@ -1,5 +1,5 @@
 <?php
-  /*
+  /* Created by Bayramklychov Shohrad
    * PDO Database Class
    * Connect to database
    * Create prepared statements

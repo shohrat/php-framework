@@ -1,3 +1,4 @@
+<?php // Created by Bayramklychov Shohrad ?>
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="jumbotron jumbotron-flud text-center">
     <div class="container">

@@ -1,5 +1,5 @@
 <?php
-  /*
+  /* Created by Bayramklychov Shohrad
    * Base Controller
    * Loads the models and views
    */

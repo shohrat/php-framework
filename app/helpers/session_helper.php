@@ -1,4 +1,5 @@
 <?php
+// Created by Bayramklychov Shohrad
   session_start();
 
   // Flash message helper
@@ -23,5 +24,15 @@
         unset($_SESSION[$name]);
         unset($_SESSION[$name. '_class']);
       }
+    }
+  }
+
+  function isLoggedIn(){
+    if(isset($_SESSION['user_id'])){
+      return true;
+    }
+    else
+    {
+      return false;
     }
   }
