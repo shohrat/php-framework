@@ -1,6 +1,6 @@
 <?php // Created by Bayramklychov Shohrad ?>
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<a href="<?php echo URLROOT; ?>/posts" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
+<span onclick="goBack()" class="btn btn-light"><i class="fa fa-backward"></i> Back</span>
 <br>
 <h1><?php echo $data['post']->title; ?></h1>
 <div class="bg-secondary text-white p-2 mb-3">
@@ -8,7 +8,7 @@
 Written by <?php echo $data['user']->name; ?> on <?php echo $data['post']->created_at; ?>
 </div>
 
-<p><?php echo $data['post']->body; ?></p>
+<p><?php echo base64_decode($data['post']->body); ?></p>
 
 <?php if($data['post']->user_id == $_SESSION['user_id']) : ?>
 <hr>
@@ -19,5 +19,10 @@ Written by <?php echo $data['user']->name; ?> on <?php echo $data['post']->creat
 </form>
 
 <?php endif; ?>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

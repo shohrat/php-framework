@@ -14,8 +14,15 @@
       // Get posts
       $posts = $this->postModel->getPosts();
 
+      // get count of posts
+      $total_rows = $this->postModel->totalPosts();
+      // get limit of posts
+      $limit_posts = $this->postModel->getLimit();
+
       $data = [
-        'posts' => $posts
+        'posts' => $posts,
+        'total_rows' => $total_rows,
+        'limit_posts' => $limit_posts
       ];
 
       $this->view('posts/index', $data);
@@ -69,8 +76,9 @@
     public function edit($id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
           // Sanitize POST array
-          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-  
+          //$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+          $_POST = filter_input_array(INPUT_POST);
+
           $data = [
             'id' => $id,
             'title' => trim($_POST['title']),

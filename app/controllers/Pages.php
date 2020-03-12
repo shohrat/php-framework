@@ -17,8 +17,18 @@
       ];
      
       $this->view('pages/index', $data);
+    
     }
+    
+    public function profile(){
+      $data = [
+        'title' => 'Profile',
+        'description' => 'Profile page'
+      ];
 
+      $this->view('pages/profile', $data);
+    }
+    
     public function about(){
       $data = [
         'title' => 'About Us',
@@ -27,4 +37,6 @@
 
       $this->view('pages/about', $data);
     }
+
+
   }

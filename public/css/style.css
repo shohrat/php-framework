@@ -1,0 +1,19 @@
+.hidden{
+   
+}
+
+.page-footer{
+    /* position: absolute;
+    bottom: 0;
+    width: 100%;*/
+    color: #FFF !important; 
+}
+
+.page-item .page-link{
+    color: #000;
+}
+
+.page-item.active .page-link{
+    background-color: #000;
+    border-color: #000;
+}

@@ -1,13 +1,40 @@
 <?php
 // Created by Bayramklychov Shohrad
 class Post{
+    
     private $db;
+    private $limit_posts;
 
     public function __construct(){
         $this->db = new Database;
     }
 
+    //get limit of posts
+    public function getLimit(){
+      $this->limit_posts = 4;
+      return $this->limit_posts;
+    }
+
+    //total posts
+    public function totalPosts(){
+      $this->db->query('SELECT COUNT(*) as count FROM posts');
+      $total_rows = $this->db->single();
+      $total_rows = $total_rows;
+      return $total_rows;
+    }
+
     public function getPosts(){
+        
+        if (isset($_GET['page'])){
+          $pn = $_GET['page'];
+        }
+        else
+        {
+          $pn = 1;
+        }
+
+        $start_from = ($pn-1) * $this->getLimit();  
+
         $this->db->query('SELECT *,
                           posts.id as postId,
                           users.id as userId,  
@@ -17,6 +44,7 @@ class Post{
                           INNER JOIN users
                           ON posts.user_id = users.id
                           ORDER BY posts.created_at DESC
+                          LIMIT '.$start_from.', '.$this->getLimit().'
                          ');
 
         $results = $this->db->resultSet();
@@ -24,13 +52,12 @@ class Post{
         return $results;
     }
     
-
     public function addPost($data){
         $this->db->query('INSERT INTO posts(title, user_id, body) VALUES(:title, :user_id, :body)');
         // Bind values
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':user_id', $data['user_id']);
-        $this->db->bind(':body', $data['body']);
+        $this->db->bind(':body', base64_encode($data['body']));
   
         // Execute
         if($this->db->execute()){
@@ -41,12 +68,13 @@ class Post{
     }
 
     public function updatePost($data){
+
         $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':title', $data['title']);
-        $this->db->bind(':body', $data['body']);
-  
+        $this->db->bind(':body', base64_encode($data['body']));
+
         // Execute
         if($this->db->execute()){
           return true;
